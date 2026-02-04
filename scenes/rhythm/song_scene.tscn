@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://2kmdp8xoj86i"]
+
+[ext_resource type="PackedScene" uid="uid://dwtlsg1pu3ax5" path="res://scenes/staging/game_scene_base.tscn" id="1_0h8i1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0h8i1"]
+size = Vector2(2.5, 2.5)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0h8i1"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_1w2t4"]
+sky_material = SubResource("ProceduralSkyMaterial_0h8i1")
+
+[sub_resource type="Environment" id="Environment_ytxf2"]
+background_mode = 2
+sky = SubResource("Sky_1w2t4")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="SceneBase" instance=ExtResource("1_0h8i1")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(6.4267607, 0, 0, 0, 3.4068148, 0, 0, 0, 6.5269423, 0, 0, 0)
+mesh = SubResource("PlaneMesh_0h8i1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
+environment = SubResource("Environment_ytxf2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="2"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Label3D" type="Label3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5106502, -4.570053)
+text = "Song scene loaded"
+
+[node name="XROrigin3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)

@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://15ltshm4gr7p"]
+
+[ext_resource type="Script" uid="uid://cgick07mcr4qp" path="res://scripts/ui/menu_controller.gd" id="1_3rkf3"]
+[ext_resource type="PackedScene" uid="uid://dwtlsg1pu3ax5" path="res://scenes/staging/game_scene_base.tscn" id="1_nl8w3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3rkf3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_hj162"]
+sky_material = SubResource("ProceduralSkyMaterial_3rkf3")
+
+[sub_resource type="Environment" id="Environment_247la"]
+background_mode = 2
+sky = SubResource("Sky_hj162")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_kiqgm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hj162"]
+size = Vector2(2.5, 2.5)
+
+[node name="SceneBase" instance=ExtResource("1_nl8w3")]
+
+[node name="MenuController" type="Node" parent="." index="0"]
+script = ExtResource("1_3rkf3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
+environment = SubResource("Environment_247la")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="2"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MenuBoard" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3586054, -3.317332)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MenuBoard" index="0"]
+transform = Transform3D(2.285908, 0, 0, 0, 1, 0, 0, 0, 0.0194906, 0, 0.64825416, -1.2784085)
+mesh = SubResource("BoxMesh_kiqgm")
+
+[node name="Label3D" type="Label3D" parent="MenuBoard" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.97289795, -1.2647182)
+text = "Free Software Clap VR"
+font_size = 35
+
+[node name="Label3D2" type="Label3D" parent="MenuBoard" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6579259, -1.2624601)
+text = "Press Start"
+
+[node name="Label3D3" type="Label3D" parent="MenuBoard" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32912546, -1.2627599)
+text = "Press enter (dev mode)"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D" index="3"]
+transform = Transform3D(6.313375, 0, 0, 0, 3.3467093, 0, 0, 0, 6.4117894, 0, 0, 0)
+mesh = SubResource("PlaneMesh_hj162")
