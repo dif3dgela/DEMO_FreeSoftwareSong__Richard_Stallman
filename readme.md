@@ -46,4 +46,3 @@ The core gameplay is intentionally simple and shippable fast:
 ```bash
 git clone <YOUR_REPO_URL>
 cd free-software-clap-vr
-
