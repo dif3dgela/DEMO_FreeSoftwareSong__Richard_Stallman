@@ -1,6 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://2kmdp8xoj86i"]
+[gd_scene load_steps=14 format=3 uid="uid://2kmdp8xoj86i"]
 
 [ext_resource type="PackedScene" uid="uid://dwtlsg1pu3ax5" path="res://scenes/staging/game_scene_base.tscn" id="1_0h8i1"]
+[ext_resource type="AudioStream" uid="uid://bvjlgwk34xqqc" path="res://assets/audio/mp3/free_software_song.mp3" id="2_1w2t4"]
+[ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="2_vrk6k"]
+[ext_resource type="Material" uid="uid://txs6yqlmnpi2" path="res://addons/godot-xr-tools/hands/materials/glove_african_green_camo.tres" id="3_78suh"]
+[ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="4_dage3"]
+[ext_resource type="Material" uid="uid://di8q50ljmjoar" path="res://addons/godot-xr-tools/hands/materials/glove_african_dark_camo.tres" id="5_wxfrw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0h8i1"]
 size = Vector2(2.5, 2.5)
@@ -17,6 +22,15 @@ background_mode = 2
 sky = SubResource("Sky_1w2t4")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrk6k"]
+albedo_color = Color(0.44415703, 0.22287005, 0.11298639, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vrk6k"]
+material = SubResource("StandardMaterial3D_vrk6k")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_78suh"]
+size = Vector3(2.4136353, 0.7524414, 0.66259766)
 
 [node name="SceneBase" instance=ExtResource("1_0h8i1")]
 
@@ -37,3 +51,25 @@ text = "Song scene loaded"
 
 [node name="XROrigin3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="LeftHand" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("2_vrk6k")]
+hand_material_override = ExtResource("3_78suh")
+
+[node name="RightHand" parent="XROrigin3D/RightHand" index="0" instance=ExtResource("4_dage3")]
+hand_material_override = ExtResource("5_wxfrw")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="5"]
+stream = ExtResource("2_1w2t4")
+autoplay = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.12379563)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(2.438859, 0, 0, 0, 0.7564254, 0, 0, 0, 0.6871908, 0, 0.38870108, -0.70877624)
+mesh = SubResource("BoxMesh_vrk6k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0016174316, 0.38256836, -0.71174806)
+shape = SubResource("BoxShape3D_78suh")
